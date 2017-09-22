@@ -1,12 +1,12 @@
 +++
-date = 2016-04-20
-lastmod = 2017-09-03
+date = 2017-09-21
+lastmod = 2017-09-21
 draft = false
 tags = ["academic", "hugo"]
 title = "Getting started with the Academic framework for Hugo"
 math = true
 summary = """
-Create a beautifully simple personal or academic website in under 10 minutes. 
+Create a beautifully simple personal or academic website in under 10 minutes. THIS IS A BIG FAT LIE!!!
 """
 
 [header]
@@ -15,28 +15,29 @@ caption = "Image credit: [**Academic**](https://github.com/gcushen/hugo-academic
 
 +++
 
-The Academic framework enables you to easily create a beautifully simple personal or academic website using the [Hugo](https://gohugo.io) static site generator.
+So instead of being able to create a website in an hour, so far I've spent 8 (over 2 days).  I keep getting errors!!!!!  Hopefully I will have it now.  My goal will be to change one thing (file) and worry about any other changes tomorrow.     Tomorrow, tomorrow, there's always tomorrow...
+
+OK so now instead of being able to comment out the table of contents it just added the <!- (not even a second dash).
+
+Now I am REALLY irritated that this is not working.
+
+Alright, I got MOST of it gone (another 30 minutes of my life).
+
 
 Key features:
 
-- Easily manage your homepage, blog posts, publications, talks, and projects
-- Configurable widgets available for Biography, Publications, Projects, News/Blog, Talks, and Contact
-- Need a different section? Just use the Custom widget!
-- Write in [Markdown]({{< ref "post/writing-markdown-latex.md" >}}) for easy formatting and code highlighting, with [LaTeX](https://en.wikibooks.org/wiki/LaTeX/Mathematics) for mathematical expressions
-- Social/academic network linking, [Google Analytics](https://analytics.google.com), and [Disqus](https://disqus.com) comments
-- Responsive and mobile friendly
-- Simple and refreshing one page design
-- Easy to customize
+I like this simple design with the bold colors
 
-{{% toc %}}
-
+ 
+<!-- {{% toc %}}
+ 
 ## Installation
 
 1. [Install Hugo](https://georgecushen.com/create-your-website-with-hugo/#installing-hugo) and create a new website by typing the following commands in your *Terminal* or *Command Prompt* app:
 
         hugo new site my_website
         cd my_website
-
+ 
 2. Install Academic with [git](https://help.github.com/articles/set-up-git/):
 
         git clone https://github.com/gcushen/hugo-academic.git themes/academic
@@ -181,9 +182,10 @@ Please use the [issue tracker](https://github.com/gcushen/hugo-academic/issues) 
 
 For general questions about Hugo, there is a [Hugo discussion forum](http://discuss.gohugo.io).
 
-
+ -->
 ## License
 
 Copyright 2016 [George Cushen](https://georgecushen.com).
 
 Released under the [MIT](https://github.com/gcushen/hugo-academic/blob/master/LICENSE.md) license.
+

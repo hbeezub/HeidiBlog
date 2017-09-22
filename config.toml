@@ -1,6 +1,6 @@
-baseurl = "https://example.com/"  # End your URL with a `/` trailing slash.
+baseurl = "https://mdm-president-cake-beezub.netlify.com/"  # End your URL with a `/` trailing slash.
 title = "Academic"
-copyright = "&copy; 2016 Your Name"
+copyright = "&copy; 2016 Heidi Beezub"
 theme = "hugo-academic"
 enableEmoji = true
 footnotereturnlinkcontents = "<sup>^</sup>"
@@ -19,16 +19,16 @@ defaultContentLanguageInSubdir = false
   hrefTargetBlank = true
 
 [params]
-  name = "Lena Smith"
-  role = "Professor of Artificial Intelligence"
-  organization = "Stanford University"
+  name = "Heidi Beezub"
+  role = "Graduate Student"
+  organization = "Mercyhurst University"
   organization_url = ""
   gravatar = false  # Get your avatar from Gravatar.com? (true/false)
   avatar = "portrait.jpg"  # Specify an avatar image (in `static/img/` folder) or delete value to disable avatar.
-  email = "test@example.org"
-  address = "Building 1 Room 1, Stanford University, California, 90210, USA"
+  email = "hbeezub@lakers.mercyhurst.edu"
+  address = "Erie, PA USA"
   office_hours = "Monday 10:00 to 13:00 or email for appointment"
-  phone = "888 888 88 88"
+  phone = "814 860 2489"
   skype = "echo123"
   telegram = ""
 
