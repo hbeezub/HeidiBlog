@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rstudio on Academic</title>
+    <link>/tags/rstudio/</link>
+    <description>Recent content in Rstudio on Academic</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2016 Heidi Beezub</copyright>
+    <lastBuildDate>Sun, 24 Sep 2017 00:00:00 -0400</lastBuildDate>
+    <atom:link href="/tags/rstudio/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Blog 2017-09-24 Data Visualization (blog#2)</title>
+      <link>/post/blog-2017-09-24/</link>
+      <pubDate>Sun, 24 Sep 2017 00:00:00 -0400</pubDate>
+      
+      <guid>/post/blog-2017-09-24/</guid>
+      <description>&lt;p&gt;OK so this is attempt 3 for this blog post.  We&amp;rsquo;re (that would be the royal we-I don&amp;rsquo;t have a mouse in my pocket) going to get the text up &amp;amp; then work from there.&lt;/p&gt;
+
+&lt;p&gt;We used R-studio to create a scatter plot of baseball information (from the Lahman library).  Aside from learning how to do the scatter plot, the most interesting thing I learned is that the &amp;ldquo;css&amp;rdquo; that I keep seeing in the sample blog has to do with viewing the HTML information.  I had been wondering what all of them were (and now I know)&lt;/p&gt;
+
+&lt;p&gt;I. Our first step was to open r-studio and install all the packages we would need and then bring them all in with &amp;lsquo;library&amp;rsquo;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Lahman&lt;/li&gt;
+&lt;li&gt;dplyr&lt;/li&gt;
+&lt;li&gt;ggplot2&lt;/li&gt;
+&lt;li&gt;ggiraph: which is the HTML widget (no clue what that means-but let&amp;rsquo;s move on)&lt;/li&gt;
+&lt;li&gt;so I figued out how to make the bullet points above by adding a space after the dash
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;II. We pulled some interesting information: players with more than 400 career Home runs, but we also wanted to know the number of strikeouts too.  We used the following code:&lt;/p&gt;
+
+&lt;p&gt;Batting %&amp;gt;%
+  group_by(playerID)%&amp;gt;%
+  summarize(career_HR=sum(HR), career_SO=sum(SO))%&amp;gt;%
+  filter(career_HR &amp;gt;=400)&lt;/p&gt;
+
+&lt;p&gt;Since we will be using this information to create graph, we want to define it as a table.  The table name is df.  we put a &amp;lsquo;df&amp;lt;-&amp;rsquo; (the carrot &amp;amp; dash make a little arrow) before &amp;lsquo;batting&amp;rsquo; and then after the code close/end the table with another &amp;lsquo;df&amp;rsquo; a space below.&lt;/p&gt;
+
+&lt;p&gt;III. We then created our graph using ggplot, in the same way that the &amp;lsquo;%&amp;gt;%&amp;rsquo; is the continuation character for r markdown, the &amp;lsquo;+&amp;rsquo; is the continuation character for  ggplot.  the &amp;lsquo;aes&amp;rsquo; (asthetic) is for the xy axis.  The geom_point indicates we want a scatter plot (points).  If we wanted some other type, like a bar chart we would use geom_bar.  ggtitle gives our graph it&amp;rsquo;s name, and the xlab &amp;amp; ylab (label) give the axes names.&lt;/p&gt;
+
+&lt;p&gt;ggplot()+
+  geom_point_interactive(data=HR_vs_SO,aes(x=career_SO,y=career_HR))+
+  ggtitle(&amp;ldquo;career Homeruns vs. Strikeouts for great hitters&amp;rdquo;)+
+  xlab(&amp;ldquo;Career Strikeouts&amp;rdquo;)+
+  ylab(&amp;ldquo;Career Homeruns&amp;rdquo;)&lt;/p&gt;
+
+&lt;p&gt;again we want to &amp;lsquo;save&amp;rsquo; this so we name it (like we did the batting information) &amp;lsquo;g&amp;lt;-&amp;rsquo; before ggplot.&lt;/p&gt;
+
+&lt;p&gt;This gives us a nice visual, but we don&amp;rsquo;t know what (or rather who) the points represent.&lt;/p&gt;
+
+&lt;p&gt;IV. So we use colnames(master) to find out the table names in the Lahman information.  Now we want to &amp;lsquo;paste&amp;rsquo; together the first &amp;amp; last names.  The following code is added to the &amp;lsquo;Batting&amp;rsquo; code to show the first &amp;amp; last names:&lt;/p&gt;
+
+&lt;p&gt;HR_vs_SO&amp;lt;-inner_join(df,Master,by=c(&amp;lsquo;playerID&amp;rsquo;))%&amp;gt;%
+  select(nameFirst,nameLast,career_HR,career_SO)&lt;/p&gt;
+
+&lt;p&gt;HR_vs_SO$name&amp;lt;-paste(HR_vs_so$nameFirst, HR_vs_so$nameLast)&lt;/p&gt;
+
+&lt;p&gt;&amp;lsquo;V.&amp;rsquo; Now we add a little more code we define the name as a tool tip &amp;amp; modify our gg plot code so that as we hover over our points, we get the names:&lt;/p&gt;
+
+&lt;p&gt;geom_point_interactive(data=HR_vs_SO,aes(x=career_SO,y=career_HR,tooltip=name, data_id=nameLast))&lt;/p&gt;
+
+&lt;p&gt;VI.Ok, so the final code looks like this:&lt;/p&gt;
+
+&lt;p&gt;df&amp;lt;-Batting %&amp;gt;%
+  group_by(playerID)%&amp;gt;%
+  summarize(career_HR=sum(HR), career_SO=sum(SO))%&amp;gt;%
+  filter(career_HR &amp;gt;=400)&lt;/p&gt;
+
+&lt;p&gt;df&lt;/p&gt;
+
+&lt;p&gt;HR_vs_SO&amp;lt;-inner_join(df,Master,by=c(&amp;lsquo;playerID&amp;rsquo;))%&amp;gt;%
+  select(nameFirst,nameLast,career_HR,career_SO)&lt;/p&gt;
+
+&lt;p&gt;HR_vs_SO$name&amp;lt;-paste(HR_vs_so$nameFirst, HR_vs_so$nameLast)&lt;/p&gt;
+
+&lt;p&gt;HR_vs_SO
+#&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-&lt;/p&gt;
+
+&lt;p&gt;g&amp;lt;-ggplot()+
+  geom_point_interactive(data=HR_vs_SO,aes(x=career_SO,y=career_HR,tooltip=name, data_id=nameLast))+
+  ggtitle(&amp;ldquo;career Homeruns vs. Strikeouts for great hitters&amp;rdquo;)+
+  xlab(&amp;ldquo;Career Strikeouts&amp;rdquo;)+
+  ylab(&amp;ldquo;Career Homeruns&amp;rdquo;)+&lt;/p&gt;
+
+&lt;p&gt;HR_vs_SO$name&amp;lt;-paste(HR_vs_so$nameFirst,HR_vs_so$nameLast)&lt;/p&gt;
+
+&lt;p&gt;ggiraph(code=print(g),hover_css = &amp;ldquo;fill:white;stroke:black&amp;rdquo;)&lt;/p&gt;
+
+&lt;p&gt;Note: I&amp;rsquo;m using Roman numerals because when I tried &amp;lsquo;1,2&amp;rsquo;3&amp;rdquo; it made them all  &amp;ldquo;1&amp;rdquo;.  I found some info on line about &amp;ldquo;ordered lists&amp;rdquo; in HTML, but I&amp;rsquo;m not sure how to insert it into the HTML file (I think it will go in the public/post/index.html file.  I&amp;rsquo;m going to need to find out a little bit more to be sure.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

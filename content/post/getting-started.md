@@ -2,8 +2,8 @@
 date = 2017-09-21
 lastmod = 2017-09-21
 draft = false
-tags = ["academic", "hugo"]
-title = "Getting started with the Academic framework for Hugo"
+tags = ["blog", "data650"]
+title = "blog 2017-09-21 -My first blog"
 math = true
 summary = """
 Create a beautifully simple personal or academic website in under 10 minutes. THIS IS A BIG FAT LIE!!!

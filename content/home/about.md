@@ -12,26 +12,26 @@ weight = 1
 # List your academic interests.
 [interests]
   interests = [
-    "Artificial Intelligence",
-    "Computational Linguistics",
-    "Information Retrieval"
+    "Data Science",
+    "Gardening",
+    "Programming"
   ]
 
 # List your qualifications (such as academic degrees).
 [[education.courses]]
-  course = "PhD in Artificial Intelligence"
-  institution = "Stanford University"
-  year = 2012
+  course = "BA Business Administration"
+  institution = "Mercyhurst University"
+  year = 1987
 
 [[education.courses]]
-  course = "MEng in Artificial Intelligence"
-  institution = "Massachusetts Institute of Technology"
-  year = 2009
+  course = "Teaching Certificate Secondary English"
+  institution = "Edinboro University"
+  year = 1995
 
 [[education.courses]]
-  course = "BSc in Artificial Intelligence"
-  institution = "Massachusetts Institute of Technology"
-  year = 2008
+  course = "Graduate Student"
+  institution = "Mercyhurst University"
+  year = 2017
  
 +++
 
@@ -39,4 +39,4 @@ weight = 1
 
 Heidi Beezub is a Graduate student of Data Science at Mercyhurst University. She leads a double life as a Managerial Coct Accountant(MCA) Program Analyst at the VA Medical Center.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate. 
+This Website is a work in progress, I'll be updating the information from the template and inserting my own much more interesting information as the days go by.  But if there is one thing I have learned, changes need to be small or I crash the whole thing & have to start over again. 

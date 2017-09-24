@@ -29,8 +29,7 @@ defaultContentLanguageInSubdir = false
   address = "Erie, PA USA"
   office_hours = "Monday 10:00 to 13:00 or email for appointment"
   phone = "814 860 2489"
-  skype = "echo123"
-  telegram = ""
+
 
   # Enable Keybase in Contact section by entering your keybase.io username.
   keybase = ""
@@ -126,13 +125,13 @@ defaultContentLanguageInSubdir = false
   [[params.social]]
     icon = "envelope"
     icon_pack = "fa"
-    link = "mailto:test@example.org"
+    link = "mailto:hbeezu68@laker.mercyhurst.edu"
 
-  [[params.social]]
+   [[params.social]]
     icon = "twitter"
     icon_pack = "fa"
     link = "//twitter.com/GeorgeCushen"
-
+    
   [[params.social]]
     icon = "google-scholar"
     icon_pack = "ai"
@@ -141,7 +140,7 @@ defaultContentLanguageInSubdir = false
   [[params.social]]
     icon = "github"
     icon_pack = "fa"
-    link = "//github.com/gcushen"
+    link = "//github.com/hbeezub"
 
 
 # Navigation Links
@@ -170,8 +169,8 @@ defaultContentLanguageInSubdir = false
   weight = 4
 
 [[menu.main]]
-  name = "Teaching"
-  url = "#teaching"
+  name = "Classes"
+  url = "#classes"
   weight = 5
 
 [[menu.main]]

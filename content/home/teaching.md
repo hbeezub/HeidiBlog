@@ -2,10 +2,10 @@
 # An example of using the custom widget to create your own homepage section.
 # To create more sections, duplicate this file and edit the values below as desired.
 
-date = "2016-04-20T00:00:00"
+date = "2017-09-24T00:00:00"
 draft = false
 
-title = "Teaching"
+title = "Classes"
 subtitle = ""
 widget = "custom"
 
@@ -14,14 +14,18 @@ weight = 60
 
 +++
 
-This is an example of using the *custom* widget to create your own homepage section.
 
-I am a teaching instructor for the following courses at University X:
+I am currently enrolled in the following classes at Mercyhurst University:
 
-- CS101: An intro to computer science
-- CS102: An intro to computer science
-- CS103: An intro to computer science
-- CS104: An intro to computer science
-- CS105: An intro to computer science
-- CS106: An intro to computer science
-- CS107: An intro to computer science
+- DS650: An intro to computer science
+- DS520: Intro to Programming
+- DS550: Data Visualization
+
+
+I've completed the following classes:
+
+
+- DS000: More next semister
+- DS000: More next semister
+- DS000: More next semister
+- DS000: More next semister
