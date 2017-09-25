@@ -1,0 +1,95 @@
+---
+title: Blog 2017-09-24 Data Visualization (blog#2.4)
+author: Hbeezub
+date: '2017-09-24'
+
+tags:
+  - Data650
+  - Data Visualization
+  - Rstudio
+  - ggplot
+  
+summary: Data Visualization example in R-studio (9-22)version 2.0
+---
+
+OK so this is attempt 4 for this blog post.  So my AHa shower moment was "I'm using the wrong file format."  Sure enough, I was using an ".md" file, but I needed a ".Rmd" file.  Ok so then I was still having issues (well, I have issues so let's clarify-issues with the site giving me an error when I tried to build it).  So copy someone elses work & make changes so that it fits your original intent (& it isn't plagiarism -btw-thank's Jorge).  So now we're cooking with gas.  I can get rid of the info I don't understand & add things like summary & the site will <strong> build. </strong> Yes & I figured out (on my own) how to get that "build" bold).
+
+The text is the same, but this time I have the code inserted that I want.
+
+We used R-studio to create a scatter plot of baseball information (from the Lahman library).  Aside from learning how to do the scatter plot, the most interesting thing I learned is that the "css" that I keep seeing in the sample blog has to do with viewing the HTML information.  I had been wondering what all of them were (and now I know)
+
+I. Our first step was to open r-studio and install all the packages we would need and then bring them all in with 'library':
+
+```{r warning=FALSE, message=FALSE}
+library(devtools)
+library(Lahman)
+library(dplyr)
+library(ggplot2)
+library(ggiraph)
+```
+
+II. We pulled some interesting information: players with more than 400 career Home runs, but we also wanted to know the number of strikeouts too.  We used the following code:
+
+```{r}
+df<-Batting %>%
+  group_by(playerID)%>%
+  summarize(career_HR=sum(HR), career_SO=sum(SO))%>%
+  filter(career_HR >=400)
+```
+
+III. We then created our graph using ggplot, in the same way that the '%>%' is the continuation character for r markdown, the '+' is the continuation character for  ggplot.  the 'aes' (asthetic) is for the xy axis.  The geom_point indicates we want a scatter plot (points).  If we wanted some other type, like a bar chart we would use geom_bar.  ggtitle gives our graph it's name, and the xlab & ylab (label) give the axes names.
+
+```{r}
+HR_vs_SO<-inner_join(df,Master,by=c("playerID"))%>%
+  select(nameFirst,nameLast,career_HR,career_SO)
+
+g<-ggplot()+
+  geom_point_interactive(data=HR_vs_SO,aes(x=career_SO,y=career_HR))+
+  ggtitle("Career Home Runs vs Strike Outs for Great Hitlers.")+
+  xlab("Career Strikeouts")+
+  ylab("Career Homeruns")
+
+```
+
+Again we want to 'save' this so we name it (like we did the batting information) 'g<-' before ggplot.
+
+This gives us a nice visual, but we don't know what (or rather who) the points represent.
+
+IV. So we use colnames(master) to find out the table names in the Lahman information.  Now we want to 'paste' together the first & last names.  The following code is added to the 'Batting' code to show the first & last names:
+
+```{r}
+HR_vs_SO<-inner_join(df,Master,by=c('playerID'))%>%
+  select(nameFirst,nameLast,career_HR,career_SO)
+
+```
+
+'V.' Now we add a little more code we define the name as a tool tip & modify our gg plot code so that as we hover over our points, we get the names:
+
+geom_point_interactive(data=HR_vs_SO,aes(x=career_SO,y=career_HR,tooltip=name, data_id=nameLast))
+
+and add some color to our visual:
+
+ggiraph(code=print(g),hover_css="Fill:white;stroke:blue")
+
+VI.Ok, so the final code looks like this:
+
+```{r}
+df<-Batting%>%
+  group_by(playerID)%>%
+  summarize(career_HR=sum(HR),career_SO=sum(SO))%>%
+  filter(career_HR >= 400)
+
+HR_vs_SO<-inner_join(df,Master,by=c("playerID"))%>%
+  select(nameFirst,nameLast,career_HR,career_SO)
+
+HR_vs_SO$name<-paste(HR_vs_SO$nameFirst,HR_vs_SO$nameLast)
+
+g<-ggplot()+
+  geom_point_interactive(data=HR_vs_SO,aes(x=career_SO,y=career_HR,tooltip=nameLast,data_id=nameLast))+
+  ggtitle("Career Home Runs vs Strike Outs for Great Hitlers.")+
+  xlab("Career Strikeouts")+
+  ylab("Career Homeruns")
+
+ggiraph(code=print(g),hover_css="Fill:white;stroke:blue")
+```
+

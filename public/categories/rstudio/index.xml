@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rstudio on Academic</title>
+    <link>/categories/rstudio/</link>
+    <description>Recent content in Rstudio on Academic</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2016 Heidi Beezub</copyright>
+    <lastBuildDate>Sun, 24 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/categories/rstudio/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Blog 2017-09-24 Data Visualization (blog#2)</title>
+      <link>/post/the-lahman-database/</link>
+      <pubDate>Sun, 24 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/the-lahman-database/</guid>
+      <description>&lt;p&gt;Let’s work with the Lahman baseball database in RStudio.&lt;/p&gt;
+&lt;p&gt;First, let’s load some packages:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(Lahman)
+library(dplyr)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now let’s run some code:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;Batting%&amp;gt;%
+  select(playerID,teamID,yearID,HR)%&amp;gt;%
+  filter(HR&amp;gt;50)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     playerID teamID yearID HR
+## 1   ruthba01    NYA   1920 54
+## 2   ruthba01    NYA   1921 59
+## 3   ruthba01    NYA   1927 60
+## 4   ruthba01    NYA   1928 54
+## 5  wilsoha01    CHN   1930 56
+## 6   foxxji01    PHA   1932 58
+## 7  greenha01    DET   1938 58
+## 8  kinerra01    PIT   1947 51
+## 9   mizejo01    NY1   1947 51
+## 10 kinerra01    PIT   1949 54
+## 11  mayswi01    NY1   1955 51
+## 12 mantlmi01    NYA   1956 52
+## 13 mantlmi01    NYA   1961 54
+## 14 marisro01    NYA   1961 61
+## 15  mayswi01    SFN   1965 52
+## 16 fostege01    CIN   1977 52
+## 17 fieldce01    DET   1990 51
+## 18 mcgwima01    OAK   1996 52
+## 19 griffke02    SEA   1997 56
+## 20 griffke02    SEA   1998 56
+## 21 mcgwima01    SLN   1998 70
+## 22  sosasa01    CHN   1998 66
+## 23 mcgwima01    SLN   1999 65
+## 24  sosasa01    CHN   1999 63
+## 25 bondsba01    SFN   2001 73
+## 26 gonzalu01    ARI   2001 57
+## 27 rodrial01    TEX   2001 52
+## 28  sosasa01    CHN   2001 64
+## 29 rodrial01    TEX   2002 57
+## 30 thomeji01    CLE   2002 52
+## 31 jonesan01    ATL   2005 51
+## 32 howarry01    PHI   2006 58
+## 33 ortizda01    BOS   2006 54
+## 34 rodrial01    NYA   2007 54
+## 35 bautijo02    TOR   2010 54
+## 36 davisch02    BAL   2013 53&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

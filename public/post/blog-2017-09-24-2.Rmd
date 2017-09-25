@@ -1,0 +1,29 @@
+---
+title: "blog-2017-09-24-2"
+author: "hbeezub"
+date: "September 25, 2017"
+output: html_document
+---
+load library
+
+```{r warning=FALSE,message=FALSE}
+library(Lahman)
+library(dplyr)
+library(ggplot2)
+library(ggiraph)
+```
+
+
+type script
+
+
+```{r}
+df<-Batting %>%
+  group_by(playerID)%>%
+  summarize(career_HR=sum(HR), career_SO=sum(SO))%>%
+  filter(career_HR >=400)
+
+df
+```
+
+let's see
