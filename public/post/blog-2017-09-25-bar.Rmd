@@ -1,0 +1,91 @@
+---
+title: Blog 2017-09-25 Data Visualization Bar Graph
+author: Hbeezub
+date: '2017-09-25'
+
+tags:
+  - Data650
+  - Data Visualization
+  - Rstudio
+  - ggplot
+  - bar graph
+  
+summary: Data Visualization Bar Graph example in R-studio (9-25)
+---
+
+What else I learned note: Important, when creating a blog, don't try to copy in info from a word document (the Rmarkdown file doesn't like it).  You'll only have to scrap what you've done & start over.
+
+So now let's explore a bar chart.
+
+As with any r-studio project we will need to install packages & then load libraries.
+In R-studio go to tools (at the top menu bar) click on "install packages".  Type devtool in the pop up box and click on install button.
+Repeat installation for Lahman, dplyr, ggplot, and ggiraph.  To install blogdown.
+Then bring in the libraries for devtools, Lahman, dplyr, ggplot, and ggiraph.
+
+```{r warning=FALSE, message=FALSE}
+library(devtools)
+library(Lahman)
+library(dplyr)
+library(ggplot2)
+library(ggiraph)
+```
+
+Now we need some data.  How about the total team Home Runs from 1980. The summer of 1980 I had just finished my Freshman year of High School; I was officially a Sophmore (ie wise fool).
+
+```{r}
+df<-Teams%>%
+  filter(yearID==1980)%>%
+  select(name,HR)
+```
+
+As in our scatter plot (previous post) we've defined our data with "df<-".  The "%>%"" is a continuation character.
+
+The basic graph is next.  With the bar chart we need to add "stat='identity'":
+
+```{r}
+ggplot()+
+  geom_bar(data=df,aes(x=name,y=HR),stat="identity")
+```
+
+
+#Whoa
+Well, we have a graph, but we can't read the team names on the bottom.  We need to flip the axis.
+
+```{r}
+ggplot()+
+  geom_bar(data=df,aes(x=name,y=HR),stat="identity")+
+  coord_flip()
+```
+
+<strong>Much Better</strong>
+Now, I really can't tell (easily) if the Astros had more Home Runs than the  Padres.  What we need to do is to put these in order. 
+
+Simply, adding "arrange" to the dplyr code for our base data didn't work.  So what we need to do is add in a factor.  
+
+```{r}
+df<-Teams%>%
+  filter(yearID==1980)%>%
+  select(name,HR)%>%
+  arrange(HR)
+df$name<-factor(df$name,levels=df$name)
+ggplot()+
+  geom_bar(data=df,aes(x=name,y=HR),stat="identity")+
+  coord_flip()
+```
+
+#Now we're cooking with gas
+
+Ok let's add some color and we're done:
+
+```{r}
+df<-Teams%>%
+  filter(yearID==1980)%>%
+  select(name,HR)%>%
+  arrange(HR)
+df$name<-factor(df$name,levels=df$name)
+ggplot()+
+  geom_bar(data=df,aes(x=name,y=HR),stat="identity",color="blue",fill="white")+
+  coord_flip()
+```
+
+end

@@ -40,3 +40,5 @@ weight = 1
 Heidi Beezub is a Graduate student of Data Science at Mercyhurst University. She leads a double life as a Managerial Coct Accountant(MCA) Program Analyst at the VA Medical Center.
 
 This Website is a work in progress, I'll be updating the information from the template and inserting my own much more interesting information as the days go by.  But if there is one thing I have learned, changes need to be small or I crash the whole thing & have to start over again. 
+
+Blogs:  be sure to click on the "more posts" link.  only a few show on the blog page.

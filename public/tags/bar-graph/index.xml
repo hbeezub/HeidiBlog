@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bar Graph on Academic</title>
+    <link>/tags/bar-graph/</link>
+    <description>Recent content in Bar Graph on Academic</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2016 Heidi Beezub</copyright>
+    <lastBuildDate>Mon, 25 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/bar-graph/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Blog 2017-09-25 Data Visualization Bar Graph</title>
+      <link>/post/blog-2017-09-25-bar/</link>
+      <pubDate>Mon, 25 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/blog-2017-09-25-bar/</guid>
+      <description>&lt;p&gt;What else I learned note: Important, when creating a blog, don’t try to copy in info from a word document (the Rmarkdown file doesn’t like it). You’ll only have to scrap what you’ve done &amp;amp; start over.&lt;/p&gt;
+&lt;p&gt;So now let’s explore a bar chart.&lt;/p&gt;
+&lt;p&gt;As with any r-studio project we will need to install packages &amp;amp; then load libraries. In R-studio go to tools (at the top menu bar) click on “install packages”. Type devtool in the pop up box and click on install button. Repeat installation for Lahman, dplyr, ggplot, and ggiraph. To install blogdown. Then bring in the libraries for devtools, Lahman, dplyr, ggplot, and ggiraph.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(devtools)
+library(Lahman)
+library(dplyr)
+library(ggplot2)
+library(ggiraph)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we need some data. How about the total team Home Runs from 1980. The summer of 1980 I had just finished my Freshman year of High School; I was officially a Sophmore (ie wise fool).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df&amp;lt;-Teams%&amp;gt;%
+  filter(yearID==1980)%&amp;gt;%
+  select(name,HR)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As in our scatter plot (previous post) we’ve defined our data with “df&amp;lt;-”. The “%&amp;gt;%”&amp;quot; is a continuation character.&lt;/p&gt;
+&lt;p&gt;The basic graph is next. With the bar chart we need to add “stat=‘identity’”:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot()+
+  geom_bar(data=df,aes(x=name,y=HR),stat=&amp;quot;identity&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/blog-2017-09-25-bar_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;whoa&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Whoa&lt;/h1&gt;
+&lt;p&gt;Well, we have a graph, but we can’t read the team names on the bottom. We need to flip the axis.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot()+
+  geom_bar(data=df,aes(x=name,y=HR),stat=&amp;quot;identity&amp;quot;)+
+  coord_flip()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/blog-2017-09-25-bar_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Much Better&lt;/strong&gt; Now, I really can’t tell (easily) if the Astros had more Home Runs than the Padres. What we need to do is to put these in order.&lt;/p&gt;
+&lt;p&gt;Simply, adding “arrange” to the dplyr code for our base data didn’t work. So what we need to do is add in a factor.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df&amp;lt;-Teams%&amp;gt;%
+  filter(yearID==1980)%&amp;gt;%
+  select(name,HR)%&amp;gt;%
+  arrange(HR)
+df$name&amp;lt;-factor(df$name,levels=df$name)
+ggplot()+
+  geom_bar(data=df,aes(x=name,y=HR),stat=&amp;quot;identity&amp;quot;)+
+  coord_flip()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/blog-2017-09-25-bar_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;now-were-cooking-with-gas&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Now we’re cooking with gas&lt;/h1&gt;
+&lt;p&gt;Ok let’s add some color and we’re done:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df&amp;lt;-Teams%&amp;gt;%
+  filter(yearID==1980)%&amp;gt;%
+  select(name,HR)%&amp;gt;%
+  arrange(HR)
+df$name&amp;lt;-factor(df$name,levels=df$name)
+ggplot()+
+  geom_bar(data=df,aes(x=name,y=HR),stat=&amp;quot;identity&amp;quot;,color=&amp;quot;blue&amp;quot;,fill=&amp;quot;white&amp;quot;)+
+  coord_flip()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/blog-2017-09-25-bar_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;end&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

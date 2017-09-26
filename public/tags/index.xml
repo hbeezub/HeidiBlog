@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>Bar Graph</title>
+      <link>/tags/bar-graph/</link>
+      <pubDate>Mon, 25 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/bar-graph/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Blog</title>
       <link>/tags/blog/</link>
       <pubDate>Thu, 21 Sep 2017 00:00:00 -0400</pubDate>
@@ -32,7 +41,7 @@
     <item>
       <title>Data Visualization</title>
       <link>/tags/data-visualization/</link>
-      <pubDate>Sun, 24 Sep 2017 00:00:00 -0400</pubDate>
+      <pubDate>Mon, 25 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/data-visualization/</guid>
       <description></description>
@@ -41,7 +50,7 @@
     <item>
       <title>Data650</title>
       <link>/tags/data650/</link>
-      <pubDate>Sun, 24 Sep 2017 00:00:00 -0400</pubDate>
+      <pubDate>Mon, 25 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/data650/</guid>
       <description></description>
@@ -68,7 +77,7 @@
     <item>
       <title>Ggplot</title>
       <link>/tags/ggplot/</link>
-      <pubDate>Sun, 24 Sep 2017 00:00:00 -0400</pubDate>
+      <pubDate>Mon, 25 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/ggplot/</guid>
       <description></description>
@@ -122,7 +131,7 @@
     <item>
       <title>Rstudio</title>
       <link>/tags/rstudio/</link>
-      <pubDate>Sun, 24 Sep 2017 00:00:00 -0400</pubDate>
+      <pubDate>Mon, 25 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/rstudio/</guid>
       <description></description>
