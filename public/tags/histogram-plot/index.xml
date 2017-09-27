@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Histogram Plot on Academic</title>
+    <link>/tags/histogram-plot/</link>
+    <description>Recent content in Histogram Plot on Academic</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2016 Heidi Beezub</copyright>
+    <lastBuildDate>Tue, 26 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/histogram-plot/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Blog 2017-09-26 Data Visualization Histogram Plot (9-25)</title>
+      <link>/post/blog-2017-09-26-histogram/</link>
+      <pubDate>Tue, 26 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/blog-2017-09-26-histogram/</guid>
+      <description>&lt;p&gt;OK so the &lt;strong&gt;most&lt;/strong&gt; important thing is to make sure that you ‘save’ the file from class with the working Histogram code. ’Cause if you don’t have that working code, it’s kind of hard to blog about it. Many thanks to Judy for providing the critical piece of informtion that I did not have.&lt;/p&gt;
+&lt;p&gt;A histogram is a good graph when you have one column of numerical data.&lt;/p&gt;
+&lt;p&gt;(Again) as with any r-studio project we will need to install packages &amp;amp; then load libraries. In R-studio go to tools (at the top menu bar) click on “install packages”. Type devtool in the pop up box and click on install button. Repeat installation for Lahman, dplyr, ggplot, and ggiraph. To install blogdown. Then bring in the libraries for devtools, Lahman, dplyr, ggplot, and ggiraph.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(devtools)
+library(Lahman)
+library(dplyr)
+library(ggplot2)
+library(ggiraph)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we need some data. Weight: Players weights ovr time would be some interesting data.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df&amp;lt;-Master%&amp;gt;%
+  select(weight)
+
+ggplot()+
+  geom_histogram(data=df,aes(x=weight))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Removed 854 rows containing non-finite values (stat_bin).&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/blog-2017-09-26-Histogram_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Ok so the graph looks good, but we’ve got a couple of error messages.&lt;/p&gt;
+&lt;p&gt;‘Removed 854 rows containing non-finite values (stat_bin)’ That means we’ve got some player data without weight information.&lt;/p&gt;
+&lt;p&gt;We need to filter out all the blank weights. We use the ! for not:&lt;/p&gt;
+&lt;p&gt;We’re also getting a bin error: “&lt;code&gt;stat_bin()&lt;/code&gt; using &lt;code&gt;bins = 30&lt;/code&gt;. Pick better value with &lt;code&gt;binwidth&lt;/code&gt;”. That means that we need to have more ‘bars’ or bins to put the data in. (and let’s add a title too)&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df&amp;lt;-Master%&amp;gt;%
+  filter(!is.na(weight))%&amp;gt;%
+  select(weight)
+ggplot()+
+  geom_histogram(data=df,aes(x=weight),bins=25)+
+  ggtitle(&amp;quot;Baseball Player Weights&amp;quot;) &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/blog-2017-09-26-Histogram_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt; Ok now that looks pretty good &amp;amp; no errors.&lt;/p&gt;
+&lt;p&gt;How about a little color:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df&amp;lt;-Master%&amp;gt;%
+  filter(!is.na(weight))%&amp;gt;%
+  select(weight)
+
+ggplot()+
+  geom_histogram(data=df,aes(x=weight),color=&amp;quot;White&amp;quot;,fill=&amp;quot;green&amp;quot;,bins=25)+
+  ggtitle(&amp;quot;Baseball Player Weights&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/blog-2017-09-26-Histogram_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;So that does it for Histograms.&lt;br /&gt;
+And this is a record blog: only 2 hours.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

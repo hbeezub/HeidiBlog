@@ -1,0 +1,78 @@
+---
+title: Blog 2017-09-26 Data Visualization Histogram Plot (9-25)
+author: Hbeezub
+date: '2017-09-26'
+
+tags:
+  - Data650
+  - Data Visualization
+  - Rstudio
+  - ggplot
+  - Histogram Plot
+  
+summary: Data Visualization Bar Graph example in R-studio (9-25)
+---
+
+OK so the <strong>most</strong> important thing is to make sure that you 'save' the file from class with the working Histogram code.  'Cause if you don't have that working code, it's kind of hard to blog about it.  Many thanks to Judy for providing the critical piece of informtion that I did not have.
+
+A histogram is a good graph when you have one column of numerical data.
+
+(Again) as with any r-studio project we will need to install packages & then load libraries.
+In R-studio go to tools (at the top menu bar) click on "install packages".  Type devtool in the pop up box and click on install button.
+Repeat installation for Lahman, dplyr, ggplot, and ggiraph.  To install blogdown.
+Then bring in the libraries for devtools, Lahman, dplyr, ggplot, and ggiraph.
+
+```{r warning=FALSE, message=FALSE}
+library(devtools)
+library(Lahman)
+library(dplyr)
+library(ggplot2)
+library(ggiraph)
+```
+
+Now we need some data.  Weight: Players weights ovr time would be some interesting data.
+
+```{r}
+df<-Master%>%
+  select(weight)
+
+ggplot()+
+  geom_histogram(data=df,aes(x=weight))
+```
+
+
+Ok so the graph looks good, but we've got a couple of error messages.  
+
+'Removed 854 rows containing non-finite values (stat_bin)'   That means we've got some player data without weight information.
+
+We need to filter out all the blank weights. We use the ! for not: 
+
+We're also getting a bin error: "`stat_bin()` using `bins = 30`. Pick better value with `binwidth`".
+That means that we need to have more 'bars' or bins to put the data in.  (and let's add a title too)
+
+```{r}
+df<-Master%>%
+  filter(!is.na(weight))%>%
+  select(weight)
+ggplot()+
+  geom_histogram(data=df,aes(x=weight),bins=25)+
+  ggtitle("Baseball Player Weights") 
+
+```
+Ok now that looks pretty good & no errors.
+
+How about a little color:
+
+```{r}
+df<-Master%>%
+  filter(!is.na(weight))%>%
+  select(weight)
+
+ggplot()+
+  geom_histogram(data=df,aes(x=weight),color="White",fill="green",bins=25)+
+  ggtitle("Baseball Player Weights")
+```
+
+
+So that does it for Histograms.  
+And this is a record blog: only 2 hours.
