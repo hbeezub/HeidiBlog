@@ -10,7 +10,7 @@ tags:
   - ggplot
   - Histogram Plot
   
-summary: Data Visualization Bar Graph example in R-studio (9-25)
+summary: Data Visualization Histogram Graph example in R-studio (9-25)
 ---
 
 OK so the <strong>most</strong> important thing is to make sure that you 'save' the file from class with the working Histogram code.  'Cause if you don't have that working code, it's kind of hard to blog about it.  Many thanks to Judy for providing the critical piece of informtion that I did not have.

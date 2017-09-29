@@ -41,7 +41,7 @@
     <item>
       <title>Data Visualization</title>
       <link>/tags/data-visualization/</link>
-      <pubDate>Tue, 26 Sep 2017 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 28 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/data-visualization/</guid>
       <description></description>
@@ -50,7 +50,7 @@
     <item>
       <title>Data650</title>
       <link>/tags/data650/</link>
-      <pubDate>Tue, 26 Sep 2017 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 28 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/data650/</guid>
       <description></description>
@@ -77,9 +77,18 @@
     <item>
       <title>Ggplot</title>
       <link>/tags/ggplot/</link>
-      <pubDate>Tue, 26 Sep 2017 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 28 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/ggplot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Google Anniversary</title>
+      <link>/tags/google-anniversary/</link>
+      <pubDate>Thu, 28 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/google-anniversary/</guid>
       <description></description>
     </item>
     
@@ -102,11 +111,11 @@
     </item>
     
     <item>
-      <title>Jekyll</title>
-      <link>/tags/jekyll/</link>
-      <pubDate>Mon, 10 Mar 2014 00:00:00 -0400</pubDate>
+      <title>Line Plot</title>
+      <link>/tags/line-plot/</link>
+      <pubDate>Thu, 28 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/jekyll/</guid>
+      <guid>/tags/line-plot/</guid>
       <description></description>
     </item>
     
@@ -134,15 +143,6 @@
       <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
       
       <guid>/tags/regression/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Rstudio</title>
-      <link>/tags/rstudio/</link>
-      <pubDate>Tue, 26 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/rstudio/</guid>
       <description></description>
     </item>
     

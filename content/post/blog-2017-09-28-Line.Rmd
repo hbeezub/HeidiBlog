@@ -1,0 +1,66 @@
+---
+title: "blog 2017-09-28 line plot 9-27"
+author: "hbeezub"
+date: "2017-09-28"
+tags:
+  - Data650
+  - Data Visualization
+  - Rstudio
+  - ggplot
+  - Line Plot
+  - Google Anniversary
+  
+summary: Data Visualization Line Graph example in R-studio (9-27)  A line graph is a great way to show data over time.
+---
+
+A Line graph is great way to show data over time.
+
+Ok we need to go through all the circus of installing packages and bringing them into R studio with library:
+
+```{r warning=FALSE, message=FALSE}
+library(devtools)
+library(Lahman)
+library(dplyr)
+library(ggplot2)
+library(ggiraph)
+```
+
+We'll extract some dat afor our time series:
+
+```{r}
+df<-Batting%>%
+  filter(playerID=='ruthba01')%>%
+  select(yearID,HR)
+```
+
+and add a simple line graph
+```{r}
+ggplot()+
+  geom_line(data=df, aes(x=yearID, y=HR))
+```
+
+Not too exciting: no title, it would be nice to have some points to know numbers.  So let's to our plotting code:
+
+```{r}
+ggplot()+
+  geom_line(data=df, aes(x=yearID, y=HR))+
+  geom_point(data=df,aes(x=yearID,y=HR))+
+  ggtitle("Babe Ruth HomeRuns")
+```
+
+Now that is definately improved.  But wait... there's more.  Act now and we can make this an interactive graph with hover points.
+
+<font color="red">-as a special bonus you get the following included at no additional charge.</font> 
+
+The <strong>funFact for Today</strong>, 9-27-2017 is that Google is 19 years old today. Happy Birthday Google.  But even of more note is that yesterday was my 19th wedding anniversary.  So my marraige is one day <strong>older</strong> than Google. 
+
+```{r}
+g<-ggplot()+
+  geom_line(data=df, aes(x=yearID, y=HR))+
+  geom_point_interactive(data=df,aes(x=yearID,y=HR,tooltip=HR,data_id=yearID))+
+  ggtitle("Babe Ruth HomeRuns")
+                       
+ggiraph(code=print(g),hover_css = "fill:white;stroke:blue")
+```
+
+It's outta here...
