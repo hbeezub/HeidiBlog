@@ -1,0 +1,32 @@
+---
+title: Blog 2017-09-27 Data Visualization Bar Graph round 2
+author: Hbeezub
+date: '2017-09-27'
+
+tags:
+  - Data650
+  - Data Visualization
+  - Rstudio
+  - ggplot
+  - bar graph
+  - factor
+  - class
+  
+summary: Data Visualization Bar Graph more info (9-27)
+---
+
+
+
+<p>Let’s revisit our prior 9-25 post on bar graphs. We will talk a little bit about varaible types. First we need to install packages 7 load libraries (just like our previous posts):</p>
+<pre class="r"><code>library(devtools)
+library(Lahman)
+library(dplyr)
+library(ggplot2)
+library(ggiraph)</code></pre>
+<p>So when we look at our prior code, we defines a variable called ‘df$name.’ What we want to find out is what type variable it is.</p>
+<pre class="r"><code>df&lt;-Teams%&gt;%
+  filter(yearID==1980)%&gt;%
+  select(name,HR)%&gt;%
+  arrange(HR)
+df$name&lt;-factor(df$name,levels=df$name)</code></pre>
+<p>next</p>

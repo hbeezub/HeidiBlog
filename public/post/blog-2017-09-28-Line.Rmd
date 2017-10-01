@@ -39,7 +39,7 @@ ggplot()+
   geom_line(data=df, aes(x=yearID, y=HR))
 ```
 
-Not too exciting: no title, it would be nice to have some points to know numbers.  So lets add to our plotting code:
+Not too exciting: no title, it would be nice to have some points to know numbers.  So let's to our plotting code:
 
 ```{r}
 ggplot()+

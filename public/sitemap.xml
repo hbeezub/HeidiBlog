@@ -5,8 +5,26 @@
     
     <url>
     
+      <loc>/post/blog-2017-10-01-website-dashboard/</loc>
+      <lastmod>2017-10-01T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/post/blog-2017-09-28-line/</loc>
       <lastmod>2017-09-28T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/blog-2017-09-27-bar-02/</loc>
+      <lastmod>2017-09-27T00:00:00+00:00</lastmod>
     </url>
     
   
@@ -206,8 +224,18 @@
     
     <url>
     
+      <loc>/tags/babe-ruth/</loc>
+      <lastmod>2017-10-01T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/tags/bar-graph/</loc>
-      <lastmod>2017-09-25T00:00:00+00:00</lastmod>
+      <lastmod>2017-09-27T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -235,8 +263,18 @@
     
     <url>
     
+      <loc>/tags/class/</loc>
+      <lastmod>2017-09-27T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/tags/data-visualization/</loc>
-      <lastmod>2017-09-28T00:00:00+00:00</lastmod>
+      <lastmod>2017-10-01T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -246,7 +284,7 @@
     <url>
     
       <loc>/tags/data650/</loc>
-      <lastmod>2017-09-28T00:00:00+00:00</lastmod>
+      <lastmod>2017-10-01T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -267,6 +305,26 @@
     
       <loc>/tags/demo/</loc>
       <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/dsahboard/</loc>
+      <lastmod>2017-10-01T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/factor/</loc>
+      <lastmod>2017-09-27T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     

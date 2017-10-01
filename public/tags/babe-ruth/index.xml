@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Babe Ruth on Academic</title>
+    <link>/tags/babe-ruth/</link>
+    <description>Recent content in Babe Ruth on Academic</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2016 Heidi Beezub</copyright>
+    <lastBuildDate>Sun, 01 Oct 2017 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/babe-ruth/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>blog 2017-10-01 flexdashboard 9-29</title>
+      <link>/post/blog-2017-10-01-website-dashboard/</link>
+      <pubDate>Sun, 01 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/blog-2017-10-01-website-dashboard/</guid>
+      <description>&lt;p&gt;see my flexdashboard &lt;a href=&#34;https://hbeezub.github.io/web2-2&#34; class=&#34;uri&#34;&gt;https://hbeezub.github.io/web2-2&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;flexdashoard (dashbaord) provides the capbility to show multiple graphs at the same time.&lt;/p&gt;
+&lt;p&gt;Check out the above website for soem intering info on Babe Ruth.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
