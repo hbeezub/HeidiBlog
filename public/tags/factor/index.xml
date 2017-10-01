@@ -16,7 +16,7 @@
       <pubDate>Wed, 27 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>/post/blog-2017-09-27-bar-02/</guid>
-      <description>&lt;p&gt;Let’s revisit our prior 9-25 post on bar graphs. We will talk a little bit about varaible types. First we need to install packages 7 load libraries (just like our previous posts):&lt;/p&gt;
+      <description>&lt;p&gt;Let’s revisit our prior 9-25 post on bar graphs. We will talk a little bit about varaible types. First we need to install packages &amp;amp; load libraries (just like our previous posts):&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(devtools)
 library(Lahman)
 library(dplyr)
@@ -28,7 +28,11 @@ library(ggiraph)&lt;/code&gt;&lt;/pre&gt;
   select(name,HR)%&amp;gt;%
   arrange(HR)
 df$name&amp;lt;-factor(df$name,levels=df$name)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;next&lt;/p&gt;
+&lt;p&gt;if we type “Teams” into the r studio command line it retuens the information in the table “teams.” if we trple class(Teams) it returns the “type” [1] “data.frame” telling us it is a data frame.&lt;/p&gt;
+&lt;p&gt;if we type “class(df$name)” into r studio is retuns [1} “factor” as the variable type&lt;/p&gt;
+&lt;p&gt;factors have levels. again if we type “factor(df$name)” into the Rstudio command line it returns the names of the 25 teams &amp;amp; ends with “26 Levels: New York Mets San Diego Padres … Milwaukee Brewers” Telling us tehre are 26 levels in the factor.&lt;/p&gt;
+&lt;p&gt;What all this tels us is that we can modify &amp;amp; control the types of variables.&lt;/p&gt;
+&lt;p&gt;end&lt;/p&gt;
 </description>
     </item>
     
