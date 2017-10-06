@@ -5,6 +5,15 @@
     
     <url>
     
+      <loc>/post/blog-2017-10-02-dataset/</loc>
+      <lastmod>2017-10-06T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/post/blog-2017-10-01-website-dashboard/</loc>
       <lastmod>2017-10-01T00:00:00+00:00</lastmod>
     </url>
@@ -273,6 +282,26 @@
     
     <url>
     
+      <loc>/tags/correcting-data/</loc>
+      <lastmod>2017-10-06T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/data-set/</loc>
+      <lastmod>2017-10-06T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/tags/data-visualization/</loc>
       <lastmod>2017-10-01T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -284,7 +313,7 @@
     <url>
     
       <loc>/tags/data650/</loc>
-      <lastmod>2017-10-01T00:00:00+00:00</lastmod>
+      <lastmod>2017-10-06T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -365,6 +394,16 @@
     
       <loc>/tags/hugo/</loc>
       <lastmod>2016-04-19T00:00:00-04:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/korean-conflict/</loc>
+      <lastmod>2017-10-06T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     

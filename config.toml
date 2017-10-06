@@ -24,10 +24,10 @@ defaultContentLanguageInSubdir = false
   organization = "Mercyhurst University"
   organization_url = ""
   gravatar = false  # Get your avatar from Gravatar.com? (true/false)
-  avatar = "portrait.jpg"  # Specify an avatar image (in `static/img/` folder) or delete value to disable avatar.
+  avatar = "ProfilePic.jpg"  # Specify an avatar image (in `static/img/` folder) or delete value to disable avatar.
   email = "hbeezub@lakers.mercyhurst.edu"
   address = "Erie, PA USA"
-  office_hours = "Monday 10:00 to 13:00 or email for appointment"
+  office_hours = "MWF 7:30am-10am & TTH 7:30am-4pm or email for appointment"
   phone = "814 860 2489"
 
 
@@ -125,12 +125,12 @@ defaultContentLanguageInSubdir = false
   [[params.social]]
     icon = "envelope"
     icon_pack = "fa"
-    link = "mailto:hbeezu68@laker.mercyhurst.edu"
+    link = "mailto:hbeezu68@lakers.mercyhurst.edu"
 
    [[params.social]]
     icon = "twitter"
     icon_pack = "fa"
-    link = "//twitter.com/GeorgeCushen"
+    link = "//twitter.com/Golfwidow98"
     
   [[params.social]]
     icon = "google-scholar"

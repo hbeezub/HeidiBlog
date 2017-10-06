@@ -57,6 +57,24 @@
     </item>
     
     <item>
+      <title>Correcting Data</title>
+      <link>/tags/correcting-data/</link>
+      <pubDate>Fri, 06 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/correcting-data/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Set</title>
+      <link>/tags/data-set/</link>
+      <pubDate>Fri, 06 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/data-set/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Data Visualization</title>
       <link>/tags/data-visualization/</link>
       <pubDate>Sun, 01 Oct 2017 00:00:00 +0000</pubDate>
@@ -68,7 +86,7 @@
     <item>
       <title>Data650</title>
       <link>/tags/data650/</link>
-      <pubDate>Sun, 01 Oct 2017 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 06 Oct 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/data650/</guid>
       <description></description>
@@ -125,24 +143,6 @@
       <pubDate>Thu, 28 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/google-anniversary/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Histogram Plot</title>
-      <link>/tags/histogram-plot/</link>
-      <pubDate>Tue, 26 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/histogram-plot/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hugo</title>
-      <link>/tags/hugo/</link>
-      <pubDate>Tue, 19 Apr 2016 00:00:00 -0400</pubDate>
-      
-      <guid>/tags/hugo/</guid>
       <description></description>
     </item>
     

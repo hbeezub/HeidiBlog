@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Correcting Data on Academic</title>
+    <link>/tags/correcting-data/</link>
+    <description>Recent content in Correcting Data on Academic</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2016 Heidi Beezub</copyright>
+    <lastBuildDate>Fri, 06 Oct 2017 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/correcting-data/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>blog 2017-10-02&amp;06 working with a data set 10-2&amp;6</title>
+      <link>/post/blog-2017-10-02-dataset/</link>
+      <pubDate>Fri, 06 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/blog-2017-10-02-dataset/</guid>
+      <description>&lt;p&gt;Ok so we sould all be tired of Baseball by now. It is &lt;strong&gt;Hockey Season &lt;/strong&gt; afterall. Go Otters!&lt;/p&gt;
+&lt;p&gt;go to Kaggle to find an “interesting” data set. We chose US Casualties of the Korean War Data from The U.S. National Archives and Records Administration&lt;/p&gt;
+&lt;p&gt;We download a csv file (an excel file saed as a csv file)&lt;/p&gt;
+&lt;p&gt;This had one worksheet with a tremendous amount of information. 36,574 rows of data, each representing a death. When we looked at the file there were a couple of columns that indicted death date. One included deaths AFTER the war, we are only interested in the ones that occured during the war. This is the INCIDENT_DATE column. But not all this data is the date of death. Some of the information in the column is text or zero. Then we determined that if the data in the INCIDENT_DATE is flawed, the date is in the FATALITY column (most of the time).&lt;/p&gt;
+&lt;p&gt;We want to look at only “good” data (that with a date), and then if the data isn’t “good” we want to look at the fatality colum (but only good data from there as well)&lt;/p&gt;
+&lt;p&gt;As with all our other projects, we’ll need to install packages &amp;amp; load libraries. In addition, we have to download the csv file (we could only “read” the data in the Lahman database once it was installed-we have to be able to read this new data too)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;library (dplyr)&lt;/li&gt;
+&lt;li&gt;library(ggplot2)&lt;/li&gt;
+&lt;li&gt;library(stringr)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Since we’ll need all this data in one place, Link to this website to see the results:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://hbeezub.github.io/web2-2&#34; class=&#34;uri&#34;&gt;https://hbeezub.github.io/web2-2&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This blog will just be the text.&lt;/p&gt;
+&lt;p&gt;so the first thing we need to do in our code is to read the csv file. deaths&amp;lt;-read.csv(‘KoreanConflict.csv’, header=TRUE, stringsAsFactors = FALSE) Stringr automatically sets the factors as columns-we don’t want this so we use the stringsAsFactors=FALSE.&lt;/p&gt;
+&lt;p&gt;As I mentioned, some of the dates aren’t dates. So we’ll need to make sure that we only want data that is YYYMMDD or 8 digits in length.&lt;/p&gt;
+&lt;p&gt;‘sum(str_detect(deaths$INCIDENT_DATE,“\d{8}”))’&lt;/p&gt;
+&lt;p&gt;‘\d means a digit {8} means a pattern of 8 $ means end’&lt;/p&gt;
+&lt;p&gt;Next we create a for loop to look at the data. If it is good we do nothing. If the date is bad, then we want to look at the fatality column, if that data is good, then we want to use it.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;for(i in 1:36574){&lt;/li&gt;
+&lt;li&gt;incident&amp;lt;-str_detect(deaths$INCIDENT_DATE[i],“\d{8}”)&lt;/li&gt;
+&lt;li&gt;fatality&amp;lt;-str_detect(deaths$FATALITY[i],“\d{8}”)&lt;/li&gt;
+&lt;li&gt;if(incident==FALSE &amp;amp; fatality==TRUE){&lt;/li&gt;
+&lt;li&gt;deaths&lt;span class=&#34;math inline&#34;&gt;\(INCIDENT_DATE[i]&amp;lt;-deaths\)&lt;/span&gt;FATALITY[i]&lt;/li&gt;
+&lt;li&gt;}&lt;/li&gt;
+&lt;li&gt;print(i)&lt;/li&gt;
+&lt;li&gt;}&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;for 1 in 1:36574 goes through each row. Incident &amp;amp; fatality are assigned the 8 digit date &lt;strong&gt; if &lt;/strong&gt; it is in the 8 digit format if the incident # is not 8 digits, but the fatality is 8 digits, it makes the fatality number the incident number This code actually changes the data.&lt;/p&gt;
+&lt;p&gt;Next we want to define the data we’ll use for out line plot:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;df&amp;lt;-deaths%&amp;gt;%&lt;/li&gt;
+&lt;li&gt;filter(str_detect(deaths$INCIDENT_DATE,“\d{8}”)==TRUE)%&amp;gt;%&lt;/li&gt;
+&lt;li&gt;group_by(INCIDENT_DATE)%&amp;gt;%&lt;/li&gt;
+&lt;li&gt;summarize(num_deaths=n())%&amp;gt;%&lt;/li&gt;
+&lt;li&gt;mutate(date =ymd(INCIDENT_DATE))%&amp;gt;%&lt;/li&gt;
+&lt;li&gt;filter(date&amp;lt;=“1953-07-27”)%&amp;gt;%&lt;/li&gt;
+&lt;li&gt;select(INCIDENT_DATE,num_deaths,date)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The df is our datafram variable. The filter is still looking for only 8 digit data (even though we’ve cleaned up the data there are still some problems). We want to group by the incident dates (date of death) To count in dplyr we use n(). the “mutate” line takes our digits &amp;amp; puts it into a year format. The filter date removes any deaths that happened after the Conflict end date of July,27,1953. Finally we select our data the incident date &amp;amp; the total number of deaths on that date.&lt;/p&gt;
+&lt;p&gt;Check out the above website for soem intering info on Babe Ruth.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
