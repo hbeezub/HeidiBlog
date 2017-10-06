@@ -12,6 +12,7 @@ tags:
   
 summary: We picked a dataset off github so we would have some different stastistics.  We learned to look for data in a specific format.
 ---
+OK-so the stupid move for today: website wasn't building-you have to add in the blogdown library  (dumbass).
 
 This blog will just be the text.
 To see the website (with text) click on the link below:

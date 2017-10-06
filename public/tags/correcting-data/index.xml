@@ -16,19 +16,23 @@
       <pubDate>Fri, 06 Oct 2017 00:00:00 +0000</pubDate>
       
       <guid>/post/blog-2017-10-02-dataset/</guid>
-      <description>&lt;p&gt;Ok so we sould all be tired of Baseball by now. It is &lt;strong&gt;Hockey Season &lt;/strong&gt; afterall. Go Otters!&lt;/p&gt;
+      <description>&lt;p&gt;OK-so the stupid move for today: website wasn’t building-you have to add in the blogdown library (dumbass).&lt;/p&gt;
+&lt;p&gt;This blog will just be the text. To see the website (with text) click on the link below:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://hbeezub.github.io/web_Korean-Confl_1002/&#34; class=&#34;uri&#34;&gt;https://hbeezub.github.io/web_Korean-Confl_1002/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Ok so we sould all be tired of Baseball by now. It is &lt;strong&gt;Hockey Season &lt;/strong&gt; afterall. Go Otters!&lt;/p&gt;
 &lt;p&gt;go to Kaggle to find an “interesting” data set. We chose US Casualties of the Korean War Data from The U.S. National Archives and Records Administration&lt;/p&gt;
 &lt;p&gt;We download a csv file (an excel file saed as a csv file)&lt;/p&gt;
 &lt;p&gt;This had one worksheet with a tremendous amount of information. 36,574 rows of data, each representing a death. When we looked at the file there were a couple of columns that indicted death date. One included deaths AFTER the war, we are only interested in the ones that occured during the war. This is the INCIDENT_DATE column. But not all this data is the date of death. Some of the information in the column is text or zero. Then we determined that if the data in the INCIDENT_DATE is flawed, the date is in the FATALITY column (most of the time).&lt;/p&gt;
 &lt;p&gt;We want to look at only “good” data (that with a date), and then if the data isn’t “good” we want to look at the fatality colum (but only good data from there as well)&lt;/p&gt;
 &lt;p&gt;As with all our other projects, we’ll need to install packages &amp;amp; load libraries. In addition, we have to download the csv file (we could only “read” the data in the Lahman database once it was installed-we have to be able to read this new data too)&lt;/p&gt;
 &lt;ul&gt;
+&lt;li&gt;r warning=FALSE,message=FALSE&lt;/li&gt;
 &lt;li&gt;library (dplyr)&lt;/li&gt;
 &lt;li&gt;library(ggplot2)&lt;/li&gt;
 &lt;li&gt;library(stringr)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Since we’ll need all this data in one place, Link to this website to see the results:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://hbeezub.github.io/web2-2&#34; class=&#34;uri&#34;&gt;https://hbeezub.github.io/web2-2&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://hbeezub.github.io/web_Korean-Confl_1002/&#34; class=&#34;uri&#34;&gt;https://hbeezub.github.io/web_Korean-Confl_1002/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;This blog will just be the text.&lt;/p&gt;
 &lt;p&gt;so the first thing we need to do in our code is to read the csv file. deaths&amp;lt;-read.csv(‘KoreanConflict.csv’, header=TRUE, stringsAsFactors = FALSE) Stringr automatically sets the factors as columns-we don’t want this so we use the stringsAsFactors=FALSE.&lt;/p&gt;
 &lt;p&gt;As I mentioned, some of the dates aren’t dates. So we’ll need to make sure that we only want data that is YYYMMDD or 8 digits in length.&lt;/p&gt;
@@ -45,7 +49,7 @@
 &lt;li&gt;print(i)&lt;/li&gt;
 &lt;li&gt;}&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;for 1 in 1:36574 goes through each row. Incident &amp;amp; fatality are assigned the 8 digit date &lt;strong&gt; if &lt;/strong&gt; it is in the 8 digit format if the incident # is not 8 digits, but the fatality is 8 digits, it makes the fatality number the incident number This code actually changes the data.&lt;/p&gt;
+&lt;p&gt;(the in-class example we wrinted the lines-bit we don’t want to do that here) Notice the {} in the for loop for 1 in 1:36574 goes through each row. Incident &amp;amp; fatality are assigned the 8 digit date &lt;strong&gt; if &lt;/strong&gt; it is in the 8 digit format if the incident # is not 8 digits, but the fatality is 8 digits, it makes the fatality number the incident number This code actually changes the data.&lt;/p&gt;
 &lt;p&gt;Next we want to define the data we’ll use for out line plot:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;df&amp;lt;-deaths%&amp;gt;%&lt;/li&gt;
@@ -54,10 +58,59 @@
 &lt;li&gt;summarize(num_deaths=n())%&amp;gt;%&lt;/li&gt;
 &lt;li&gt;mutate(date =ymd(INCIDENT_DATE))%&amp;gt;%&lt;/li&gt;
 &lt;li&gt;filter(date&amp;lt;=“1953-07-27”)%&amp;gt;%&lt;/li&gt;
-&lt;li&gt;select(INCIDENT_DATE,num_deaths,date)&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;select(INCIDENT_DATE,num_deaths,date)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;we aren’t going to worry about the “one failed to parse” warning. The df is our dataframe variable.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;The df is our datafram variable. The filter is still looking for only 8 digit data (even though we’ve cleaned up the data there are still some problems). We want to group by the incident dates (date of death) To count in dplyr we use n(). the “mutate” line takes our digits &amp;amp; puts it into a year format. The filter date removes any deaths that happened after the Conflict end date of July,27,1953. Finally we select our data the incident date &amp;amp; the total number of deaths on that date.&lt;/p&gt;
-&lt;p&gt;Check out the above website for soem intering info on Babe Ruth.&lt;/p&gt;
+&lt;p&gt;The filter is still looking for only 8 digit data (even though we’ve cleaned up the data there are still some problems).&lt;/p&gt;
+&lt;p&gt;We want to group by the incident dates (date of death)&lt;/p&gt;
+&lt;p&gt;To count in dplyr we use n().&lt;/p&gt;
+&lt;p&gt;In order to work with dates, we need to install lubridate. The date fiels we have is actually just a text string of numbers. the “mutate” line takes our digits &amp;amp; puts it into a year format.&lt;/p&gt;
+&lt;p&gt;The filter date removes any deaths that happened after the Conflict end date of July,27,1953.&lt;/p&gt;
+&lt;p&gt;Finally we select our data the incident date &amp;amp; the total number of deaths on that date.&lt;/p&gt;
+&lt;p&gt;If we waht to look at our datafame, type head(df) into the R studio command line. This shows us the top (head) of the data.&lt;/p&gt;
+&lt;p&gt;Now we’re ready to add our ggplot code:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ggplot()+&lt;/li&gt;
+&lt;li&gt;geom_line(data=df, aes(x=date,y=num_deaths))+&lt;/li&gt;
+&lt;li&gt;scale_x_date(date_breaks=‘3 months’,date_labels = “%b%y”)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The scale X code is so that we can label our dates more meaningfully. We did a google search on “strftime” to find the codes we needs (actually listed for Linux)/ %b is the month breakout &amp;amp; %y is the year without the century (last 2 digits).&lt;/p&gt;
+&lt;div id=&#34;the-next-assignment-is-to-make-a-similar-line-graph-but-group-the-deaths-based-on-the-year-the-person-was-born.&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;The next assignment is to make a similar line graph, but group the deaths based on the year the person was born.&lt;/h2&gt;
+&lt;p&gt;Ok so this should be easy-just copy the code &amp;amp; change my parametes.&lt;/p&gt;
+&lt;p&gt;Not so fast-it took me a while, but with help from google I finally figured it out.&lt;/p&gt;
+&lt;p&gt;It still takes me a while, but slowly I’m getting it…&lt;/p&gt;
+&lt;p&gt;Since this is all in the same blog, there is no need to re-load all the libraries.&lt;/p&gt;
+&lt;p&gt;IN the data base there is a BIRTH_YEAR column. Again, some of the values are blank or are text, so we will need to filter out any “bad” data.&lt;/p&gt;
+&lt;p&gt;First lets change our “read” for the csv file to brthyr as the variable. We can also look at the birthyear string (now 4 characters)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;‘{r warning=FALSE,message=FALSE}’&lt;/li&gt;
+&lt;li&gt;brthyr&amp;lt;-read.csv(‘KoreanConflict.csv’,header=TRUE,stringsAsFactors=FALSE)&lt;/li&gt;
+&lt;li&gt;sum(str_detect(brthyr$BIRTH_YEAR,“\d{4}”))&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Next we’ll create our data frame&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;df&amp;lt;-brthyr%&amp;gt;%&lt;/li&gt;
+&lt;li&gt;filter(str_detect(brthyr$BIRTH_YEAR,“\d{4}”)==TRUE)%&amp;gt;%&lt;/li&gt;
+&lt;li&gt;group_by(BIRTH_YEAR)%&amp;gt;%&lt;/li&gt;
+&lt;li&gt;summarize(num_deaths=n())%&amp;gt;%&lt;/li&gt;
+&lt;li&gt;select(BIRTH_YEAR,num_deaths)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;we’re using variable df again filtering on the BIRTH_YEAR with only 4 digits grouping by the birthyear summing the numbers with n() and then creating our data with birth year &amp;amp; number of deaths.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ggplot()+&lt;/li&gt;
+&lt;li&gt;geom_line(data=df, aes(x=BIRTH_YEAR,y=num_deaths,group=1), stat=“identity”)+&lt;/li&gt;
+&lt;li&gt;geom_point(data=df,aes(x=BIRTH_YEAR,y=num_deaths),stat=“identity”)+&lt;/li&gt;
+&lt;li&gt;theme(axis.text.x=element_text(angle=90,hjust=1))+&lt;/li&gt;
+&lt;li&gt;xlab(“Birth Year”)+&lt;/li&gt;
+&lt;li&gt;ylab(“Number of Deaths”)+&lt;/li&gt;
+&lt;li&gt;ggtitle(“Korean Conflict Deaths by BirthYear”)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;OK so this last part is where I started to run into trouble. - geom_line(data=df, aes(x=BIRTH_YEAR,y=num_deaths) Printed the years horizontally along the bottom &amp;amp; did’nt print any data. Quite frustrating I figured out how to rotate the year labels - theme(axis.text.x=element_text(angle=90,hjust=1)) (no Idea what all those things mean (I get sxis, text &amp;amp; angle 90…) My next step was to add the - geom_point(data=df,aes(x=BIRTH_YEAR,y=num_deaths)) Well now I got data, but just the data points (no line) I was getting an error: &lt;font color=red&gt; geom_path: Each group consists of only one observation. Do you need to adjust the group aesthetic?&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;Back to google again, neither I nor the person posting really knows whay it works, but we add “group=1” and I get a line…&lt;/p&gt;
+&lt;p&gt;Then I prettied it up with a titel &amp;amp; better XY labels &amp;amp; I am finally done.&lt;/p&gt;
+&lt;p&gt;It is now 6pm on a Friday night-I’m ready for a glass of Wine! end.&lt;/p&gt;
+&lt;/div&gt;
 </description>
     </item>
     
