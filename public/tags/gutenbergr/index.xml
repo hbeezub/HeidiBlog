@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gutenbergr on Academic</title>
+    <link>/tags/gutenbergr/</link>
+    <description>Recent content in Gutenbergr on Academic</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2016 Heidi Beezub</copyright>
+    <lastBuildDate>Tue, 14 Nov 2017 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/gutenbergr/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>blog-2017-11-10-text-mining-with-tidytext</title>
+      <link>/post/blog-2017-11-10-text-mining-with-tidytext/</link>
+      <pubDate>Tue, 14 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/blog-2017-11-10-text-mining-with-tidytext/</guid>
+      <description>&lt;p&gt;We are again working with gutenbergr. Let’s start by installing &amp;amp; library the following packages: devtools, dplyr, gutenbergr, tidytext,ggplot2.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(devtools)
+library(dplyr)
+library(gutenbergr)
+library(tidytext)
+library(ggplot2)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After loading all the packages we need we’ll download the novel Dracula from gutenbergr the download # is 345 Then we will get the Dracula words as a data frame Dracula_words using the unnest tokens from tidy text.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dracula&amp;lt;-gutenberg_download(345)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Determining mirror for Project Gutenberg from http://www.gutenberg.org/robot/harvest&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Using mirror http://aleph.gutenberg.org&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dracula_words&amp;lt;-dracula%&amp;gt;%
+  unnest_tokens(word,text)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then we’ll use bing to get the sentiment as either positive or negative. We’ll call this variable bing.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;bing&amp;lt;-get_sentiments(&amp;#39;bing&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then we need to use inner join to join together the dracua words &amp;amp; the sentiments from bing.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dracula_words&amp;lt;-inner_join(dracula_words,bing)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Joining, by = &amp;quot;word&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we’ll get rid of the column with the gutenbergr id number because we don’t need that. The ‘NULL’ deletes the column.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dracula_words$gutenberg_id&amp;lt;-NULL&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we’ll get all the positive sentiment words summarize &amp;amp; count them. Since there are lots of words we want the top ten. We played around with the numbers so we’ll use 66 so that we get the top ten words. We’ll save this into a variable Dracula_pos.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dracula_pos&amp;lt;-dracula_words%&amp;gt;%
+  filter(sentiment==&amp;#39;positive&amp;#39;)%&amp;gt;%
+  group_by(word)%&amp;gt;%
+  summarize(count=n())%&amp;gt;%
+  arrange(count)%&amp;gt;%
+  filter(count&amp;gt;=66)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then we’ll factor out the Dracula positive words so we can graph them and save it as dracula_pos$word.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dracula_pos$word&amp;lt;-factor(dracula_pos$word,levels=dracula_pos$word)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we’ll use this to make a bar plot with ggplot.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot()+
+  geom_bar(data=dracula_pos,aes(x=word,y=count),stat=&amp;#39;identity&amp;#39;)+
+  coord_flip()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-11-14-blog-2017-11-10-text-mining-with-tidytext_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;We’ll repeat the process for the Dracula negative words. In order to get the top 10, we need the filter count to be 49. In addition the word ‘Miss&amp;quot; is included &amp;amp; since this is a ’title’ we want to exclude it.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dracula_neg&amp;lt;-dracula_words%&amp;gt;%
+  filter(sentiment==&amp;#39;negative&amp;#39;)%&amp;gt;%
+  group_by(word)%&amp;gt;%
+  summarize(count=n())%&amp;gt;%
+  arrange(count)%&amp;gt;%
+  filter(word != &amp;#39;miss&amp;#39;)%&amp;gt;%
+  filter(count&amp;gt;=49)
+
+dracula_neg$word&amp;lt;-factor(dracula_neg$word,levels=dracula_neg$word)
+
+ggplot()+
+  geom_bar(data=dracula_neg,aes(x=word,y=count),stat=&amp;#39;identity&amp;#39;)+
+  coord_flip()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-11-14-blog-2017-11-10-text-mining-with-tidytext_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;oops&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;OOPS&lt;/h1&gt;
+&lt;p&gt;We “lost” the sentiment attached to the words so we want to retain the sentiment. After summarize count we’ll add sentiment.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dracula_pos&amp;lt;-dracula_words%&amp;gt;%
+  filter(sentiment==&amp;#39;positive&amp;#39;)%&amp;gt;%
+  group_by(word)%&amp;gt;%
+  summarize(count=n(),sentiment=first(sentiment))%&amp;gt;%
+  arrange(count)%&amp;gt;%
+  filter(count&amp;gt;=66)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now when we look at the variable-data frame Dracula_pos we see the sentiment is still attached.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(dracula_pos)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 6 x 3
+##     word count sentiment
+##    &amp;lt;chr&amp;gt; &amp;lt;int&amp;gt;     &amp;lt;chr&amp;gt;
+## 1  sweet    66  positive
+## 2  ready    71  positive
+## 3 better    77  positive
+## 4   love    84  positive
+## 5  right    99  positive
+## 6   work   146  positive&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Again, we’ll repeat the process for the negative sentiments.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dracula_neg&amp;lt;-dracula_words%&amp;gt;%
+  filter(sentiment==&amp;#39;negative&amp;#39;)%&amp;gt;%
+  group_by(word)%&amp;gt;%
+  summarize(count=n(),sentiment=first(sentiment))%&amp;gt;%
+  arrange(count)%&amp;gt;%
+  filter(word != &amp;#39;miss&amp;#39;)%&amp;gt;%
+  filter(count&amp;gt;=49)
+
+head(dracula_neg)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 6 x 3
+##      word count sentiment
+##     &amp;lt;chr&amp;gt; &amp;lt;int&amp;gt;     &amp;lt;chr&amp;gt;
+## 1    hard    49  negative
+## 2 trouble    53  negative
+## 3    fell    59  negative
+## 4    dark    77  negative
+## 5 strange    90  negative
+## 6   death    94  negative&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we don’t like that we have to hard code in a number 66 or 49 to get the top 10 words. We are going to use ‘top_n(10,wt=count)’ instead. (we aren’t sure what the wt stands for (maybe weight?)&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dracula_pos&amp;lt;-dracula_words%&amp;gt;%
+  filter(sentiment==&amp;#39;positive&amp;#39;)%&amp;gt;%
+  group_by(word)%&amp;gt;%
+  summarize(count=n(),sentiment=first(sentiment))%&amp;gt;%
+  arrange(count)%&amp;gt;%
+  top_n(10,wt=count)
+
+head(dracula_pos)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 6 x 3
+##     word count sentiment
+##    &amp;lt;chr&amp;gt; &amp;lt;int&amp;gt;     &amp;lt;chr&amp;gt;
+## 1  sweet    66  positive
+## 2  ready    71  positive
+## 3 better    77  positive
+## 4   love    84  positive
+## 5  right    99  positive
+## 6   work   146  positive&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Again, we’ll repeat for negative words.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dracula_neg&amp;lt;-dracula_words%&amp;gt;%
+  filter(sentiment==&amp;#39;negative&amp;#39;)%&amp;gt;%
+  group_by(word)%&amp;gt;%
+  summarize(count=n(),sentiment=first(sentiment))%&amp;gt;%
+  arrange(count)%&amp;gt;%
+  filter(word != &amp;#39;miss&amp;#39;)%&amp;gt;%
+  top_n(10,wt=count)
+head(dracula_neg)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 6 x 3
+##      word count sentiment
+##     &amp;lt;chr&amp;gt; &amp;lt;int&amp;gt;     &amp;lt;chr&amp;gt;
+## 1    hard    49  negative
+## 2 trouble    53  negative
+## 3    fell    59  negative
+## 4    dark    77  negative
+## 5 strange    90  negative
+## 6   death    94  negative&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, we’ll re-run our positive words plot.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dracula_pos&amp;lt;-dracula_words%&amp;gt;%
+  filter(sentiment==&amp;#39;positive&amp;#39;)%&amp;gt;%
+  group_by(word)%&amp;gt;%
+  summarize(count=n(),sentiment=first(sentiment))%&amp;gt;%
+  arrange(count)%&amp;gt;%
+  top_n(10,wt=count)
+
+dracula_pos$word&amp;lt;-factor(dracula_pos$word,levels=dracula_pos$word)
+
+ggplot()+
+  geom_bar(data=dracula_pos,aes(x=word,y=count),stat=&amp;#39;identity&amp;#39;)+
+  coord_flip()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-11-14-blog-2017-11-10-text-mining-with-tidytext_files/figure-html/unnamed-chunk-15-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;We can put the two data frames positive &amp;amp; negative on top of one another. We’ll use rbind to put the two together in a variable data frame called dracula_comp.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dracula_comp&amp;lt;-rbind(dracula_pos,dracula_neg)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let’s look at our variable dracula_comp. We can see the positive &amp;amp; negative sentiments are still attached.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(dracula_comp)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 6 x 3
+##     word count sentiment
+##   &amp;lt;fctr&amp;gt; &amp;lt;int&amp;gt;     &amp;lt;chr&amp;gt;
+## 1  sweet    66  positive
+## 2  ready    71  positive
+## 3 better    77  positive
+## 4   love    84  positive
+## 5  right    99  positive
+## 6   work   146  positive&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let’s plot these:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot()+
+  geom_bar(data=dracula_comp,aes(x=word,y=count),stat=&amp;#39;identity&amp;#39;)+
+  coord_flip()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-11-14-blog-2017-11-10-text-mining-with-tidytext_files/figure-html/unnamed-chunk-18-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The two plots are stacked one on top of the other. It would be better if we could see these side-by-side. We can get ggplot to ‘apply’ something within the plot (no change to data) use facet-wrap (the sentiment column tells us what group it is in).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot()+
+  geom_bar(data=dracula_comp,aes(x=word,y=count),stat=&amp;#39;identity&amp;#39;)+
+  coord_flip()+
+  facet_wrap(~sentiment)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-11-14-blog-2017-11-10-text-mining-with-tidytext_files/figure-html/unnamed-chunk-19-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The graphs are now side by side, but still one on top of the other split on the y axis. We want to “free” the y axis.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot()+
+  geom_bar(data=dracula_comp,aes(x=word,y=count),stat=&amp;#39;identity&amp;#39;)+
+  coord_flip()+
+  facet_wrap(~sentiment,scales=&amp;#39;free_y&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-11-14-blog-2017-11-10-text-mining-with-tidytext_files/figure-html/unnamed-chunk-20-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Now our plots are side by side Success! Let’s go out to the web &amp;amp; get some HTML color codes. The website &lt;a href=&#34;http://htmlcolorcodes.com/color-picker/&#34; class=&#34;uri&#34;&gt;http://htmlcolorcodes.com/color-picker/&lt;/a&gt; is supposed to be interactive so you can choose the color &amp;amp; color code you need. We’ll add orange to the graphs.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot()+
+  geom_bar(data=dracula_comp,aes(x=word,y=count),stat=&amp;#39;identity&amp;#39;, fill =&amp;#39;#ea6205&amp;#39;)+
+  coord_flip()+
+  facet_wrap(~sentiment,scales=&amp;#39;free_y&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-11-14-blog-2017-11-10-text-mining-with-tidytext_files/figure-html/unnamed-chunk-21-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;It would be better if each graph was its own color so we’ll make the fill the sentiment.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot()+
+  geom_bar(data=dracula_comp,aes(x=word,y=count, fill =sentiment),stat=&amp;#39;identity&amp;#39;)+
+  coord_flip()+
+  facet_wrap(~sentiment,scales=&amp;#39;free_y&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-11-14-blog-2017-11-10-text-mining-with-tidytext_files/figure-html/unnamed-chunk-22-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Now let’s choose the colors we want by adding scale fill manual to the end.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot()+
+  geom_bar(data=dracula_comp,aes(x=word,y=count, fill =sentiment),stat=&amp;#39;identity&amp;#39;)+
+  coord_flip()+
+  facet_wrap(~sentiment,scales=&amp;#39;free_y&amp;#39;)+
+  scale_fill_manual(values =c (&amp;#39;black&amp;#39;,&amp;#39;#ea6205&amp;#39;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-11-14-blog-2017-11-10-text-mining-with-tidytext_files/figure-html/unnamed-chunk-23-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;So now we have orange &amp;amp; black. Now let’s add the outline colors with color&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot()+
+  geom_bar(data=dracula_comp,aes(x=word,y=count, fill =sentiment, color=sentiment),stat=&amp;#39;identity&amp;#39;)+
+  coord_flip()+
+  facet_wrap(~sentiment,scales=&amp;#39;free_y&amp;#39;)+
+  scale_fill_manual(values =c (&amp;#39;black&amp;#39;,&amp;#39;#ea6205&amp;#39;))+
+  scale_color_manual(values =c (&amp;#39;#ea6205&amp;#39;,&amp;#39;black&amp;#39;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-11-14-blog-2017-11-10-text-mining-with-tidytext_files/figure-html/unnamed-chunk-24-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;This may be our last text mining project.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
